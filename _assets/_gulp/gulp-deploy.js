@@ -69,10 +69,10 @@ function log_free(projectName){
         .pipe(replace("../_common/images/"+size+"/", ''))
         .pipe(replace("<title>", '<title>Created: '+moment().format('MMM D, h:mm')))
         .on("end", function(){
-            for(var i=0;i<images.length;i++){     
-                console.log(images[i]);
-                gulp.src(images[i]).pipe(gulp.dest('./docs/deploy/'+projectName))               
-            }
+            // for(var i=0;i<images.length;i++){     
+            //     console.log(images[i]);
+            //     gulp.src(images[i]).pipe(gulp.dest('./docs/deploy/'+projectName))               
+            // }
         })
         .pipe(gulp.dest('./docs/deploy/'+projectName))     
         // .pipe(zip(projectName+'.zip'))

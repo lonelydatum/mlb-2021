@@ -1,11 +1,7 @@
 
 
-@import './common.scss';
+@import './proline.scss';
 
-
-.tri{
-	width: 21px;
-}
 
 
 #banner{		
@@ -14,3 +10,11 @@
 }
 
 
+
+.bgGrad{
+	height: 35px;
+}
+
+.ill{
+	transform-origin: 30% 100%;
+}
