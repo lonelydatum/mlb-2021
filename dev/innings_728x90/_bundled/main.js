@@ -38,18 +38,15 @@ var _commonJs = require('./common.js');
 var _prolineJs = require('./proline.js');
 
 function start() {
+	var xy = arguments.length <= 0 || arguments[0] === undefined ? { x: '+=' + 150, y: '+=' + 0 } : arguments[0];
 
 	var tl = (0, _commonJs.init)();
 	// return
 
 	var time = 1;
-	var X = 150;
-	var Y = 0;
 
-	var xy = { x: '+=' + X, y: '+=' + Y };
-
-	console.log(xy);
 	(0, _prolineJs.trailingFX)(time, _extends({}, xy, { opacity: 0 }));
+
 	tl.from(".t1a", .2, { x: '+=' + 250, opacity: 0 }, .6);
 	tl.from(".t1b", .01, { opacity: 0 }, "+=.4");
 
@@ -115,7 +112,7 @@ exports.trailingFX = trailingFX;
 
 var _commonJsInningsJs = require('../../_common/js/innings.js');
 
-(0, _commonJsInningsJs.start)();
+(0, _commonJsInningsJs.start)({ x: '+=' + 20, y: '+=' + 30 });
 
 module.exports = {};
 
