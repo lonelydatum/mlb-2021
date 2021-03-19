@@ -46,7 +46,7 @@ function start() {
 	var time = 1;
 
 	(0, _prolineJs.trailingFX)(time, _extends({}, xy, { opacity: 0 }));
-
+	tl.from(".bg1b", time * 1.3, _extends({}, xy, { opacity: 0 }), 0);
 	tl.from(".t1a", .2, { x: '+=' + 250, opacity: 0 }, .6);
 	tl.from(".t1b", .01, { opacity: 0 }, "+=.4");
 

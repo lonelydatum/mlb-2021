@@ -12,17 +12,15 @@ var _commonJs = require('./common.js');
 var _prolineJs = require('./proline.js');
 
 function start() {
+	var xy = arguments.length <= 0 || arguments[0] === undefined ? { x: '+=' + 50, y: '+=' + 150 } : arguments[0];
 
 	var tl = (0, _commonJs.init)();
 	// return
 
 	var time = 1;
-	var X = 150;
-	var ratio = 2 / 3;
-	var Y = ratio * _commonJs.size.h;
-	var xy = { x: '+=' + X, y: '+=' + Y };
-	tl.from(".ball", time + .2, _extends({}, xy), 0);
 
+	tl.from(".ball", time + .2, _extends({}, xy), 0);
+	tl.from(".bg1b", time * 1.2, _extends({}, xy, { opacity: 0 }), 0);
 	(0, _prolineJs.trailingFX)(time, _extends({}, xy, { opacity: 0 }));
 	tl.from(".t1a", .20, { y: '+=' + 90, opacity: 0 }, .5);
 	tl.from(".t1b", .01, { opacity: 0 }, "+=.2");
