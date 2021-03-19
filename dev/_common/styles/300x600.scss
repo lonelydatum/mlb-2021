@@ -1,0 +1,17 @@
+
+
+@import './proline.scss';
+
+#legalBtn{
+	@include pos(7, 553);
+	// opacity: 1;
+}
+
+#banner{
+	width: 300px;
+	height: 600px;
+}
+
+.ill{
+	transform-origin: 50% 40%;
+}
