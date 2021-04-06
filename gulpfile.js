@@ -11,6 +11,7 @@ var _JS_        = require('./_assets/_gulp/gulp-js.js');
 var _SCSS_      = require('./_assets/_gulp/gulp-scss.js');
 var _HTML_      = require('./_assets/_gulp/gulp-html.js');
 var _DEPLOY_    = require('./_assets/_gulp/gulp-deploy.js');
+var _ZIP_    = require('./_assets/_gulp/gulp-zip.js');
 var _projectName = '';
 
 
@@ -36,55 +37,6 @@ gulp.task('set-project-name', function(done){
 
 
 
-
-/*--------------------------------------------------------------------*/
-// single
-/*--------------------------------------------------------------------*/
-gulp.task('js-single', ['set-project-name'], function(){
-    _JS_(_projectName);
-})
-gulp.task('ejs-single', ['set-project-name'], function(){
-    _HTML_(_projectName);
-})
-gulp.task('sass-single', ['set-project-name'], function(){
-    _SCSS_(_projectName);
-})
-gulp.task('log-free-single', function () {
-    return log_free(_projectName);
-});
-
-
-
-gulp.task('dev-single', [ 'set-project-name'], function(){
-    var folderPath = './dev/'+_projectName+"/";
-    var jsWatch = ['./dev/_common/_js/*.js', folderPath+'_js/*.js'];
-    gulp.watch( jsWatch, ["js-single"]);
-
-    var ejsWatch = ['./dev/_common/templates/*.ejs', folderPath+'index.ejs', folderPath+'templates/*.ejs']
-    gulp.watch(ejsWatch, ["ejs-single"]);
-
-    var stylesWatch = ['./dev/_common/_styles/scss/*.scss', folderPath+'_styles/scss/*.scss'];
-    gulp.watch(stylesWatch, ['sass-single']);
-    _HTML_(_projectName);
-
-    _JS_(_projectName);
-    _SCSS_(_projectName);
-    takana.run({path:__dirname, includePaths:[]});
-
-});
-
-gulp.task('deploy-single', ['set-project-name', 'sass-single', 'js-single', 'ejs-single'], function(){
-    _DEPLOY_(_projectName);
-})
-/*--------------------------------------------------------------------*/
-// single
-/*--------------------------------------------------------------------*/
-
-
-
-
-
-
 /*--------------------------------------------------------------------*/
 // all
 /*--------------------------------------------------------------------*/
@@ -94,6 +46,18 @@ gulp.task('deploy', ['sass-all', 'js-all', 'ejs-all'], function(done){
         var tasks = files.map(function(entry) {
             var project = entry.split('/')[2];
             return _DEPLOY_(project);
+        });
+        es.merge(tasks).on('end', done);
+    })
+})
+
+
+gulp.task('zip',  function(done){
+    glob('./dev/**/index.html', function(err, files) {        
+        var tasks = files.map(function(entry) {
+            var project = entry.split('/')[2];
+            console.log(project);
+            return _ZIP_(project);
         });
         es.merge(tasks).on('end', done);
     })

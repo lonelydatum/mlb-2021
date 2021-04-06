@@ -45,6 +45,8 @@ function log_free(projectName){
     
     
     const size = splited[splited.length-1]
+
+    const name = splited[0]
     
 
     var images = []
@@ -67,12 +69,13 @@ function log_free(projectName){
         .pipe(replace('<script type="text/javascript" src="http://localhost:48626/takana.js"></script>', ''))
         .pipe(replace("takanaClient.run({host: 'localhost:48626'});", ''))
         .pipe(replace("../_common/images/"+size+"/", ''))
+        .pipe(replace(name+"/", ''))
         .pipe(replace("<title>", '<title>Created: '+moment().format('MMM D, h:mm')))
         .on("end", function(){
-            // for(var i=0;i<images.length;i++){     
-            //     console.log(images[i]);
-            //     gulp.src(images[i]).pipe(gulp.dest('./docs/deploy/'+projectName))               
-            // }
+            for(var i=0;i<images.length;i++){     
+                console.log(images[i]);
+                gulp.src(images[i]).pipe(gulp.dest('./docs/deploy/'+projectName))               
+            }
         })
         .pipe(gulp.dest('./docs/deploy/'+projectName))     
         // .pipe(zip(projectName+'.zip'))
